@@ -18,6 +18,7 @@ A client-side Fabric mod for Minecraft 1.21.1 that automatically right-clicks a 
 | Quick toggle | Enable/disable with **[H]** key (no GUI needed) |
 | HUD overlay | Shows current status and click progress |
 | Client-side only | No server-side mod required |
+| Discord Weebhook | Send how many brushes you got and when they broke |
 
 ---
 
