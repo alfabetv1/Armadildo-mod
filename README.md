@@ -1,4 +1,5 @@
-# AutoRepair Mod — Fabric 1.21.1 (Robiony w 100% z AI, claude ai i cursor)
+# AutoRepair Mod — Fabric 1.21.1 
+# (Robiony w 100% z AI, claude ai i cursor)
 
 A client-side Fabric mod for Minecraft 1.21.1 that automatically right-clicks a configurable number of times, then sends the `/repair` command — all from a clean in-game GUI.
 
