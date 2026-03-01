@@ -1,12 +1,12 @@
-# AutoRepair Mod — Fabric 1.21.1 
-# (Robiony w 100% z AI, claude ai i cursor)
-caly readme po angielsku bo latwiej bylo wytłumaczyć ai wklejcie se w chatgpt zeby przetlumaczyl
+# AutoRepair Mod — Fabric 1.21.1
 
-A client-side Fabric mod for Minecraft 1.21.1 that automatically right-clicks a configurable number of times, then sends the `/repair` command — all from a clean in-game GUI.
+A client-side Fabric mod for Minecraft 1.21.1 that auto right-clicks for brushing, sends `/repair`, and alerts you when your brush breaks — with Discord webhook support and in-game configuration.
 
 ---
 
 ## Features
+
+### Auto-Repair / Clicker
 
 | Feature | Details |
 |---|---|
@@ -17,8 +17,23 @@ A client-side Fabric mod for Minecraft 1.21.1 that automatically right-clicks a 
 | In-game GUI | Open with **[G]** key, all settings editable in-game |
 | Quick toggle | Enable/disable with **[H]** key (no GUI needed) |
 | HUD overlay | Shows current status and click progress |
+
+### Brush Break Detection
+
+| Feature | Details |
+|---|---|
+| Brush break alert | Detects when your main-hand brush breaks |
+| Auto-switch hotbar | Swaps to the next brush in your hotbar automatically |
+| Discord webhook | Sends a message when your brush breaks |
+| @here ping | Pings everyone in the channel so you get notified |
+| Brush counts | Shows how many brushes you have left (hotbar + inventory) in chat and in the Discord message |
+| Test webhook | Verify your Discord URL works before waiting for a break |
+
+### General
+
+| Feature | Details |
+|---|---|
 | Client-side only | No server-side mod required |
-| Discord Weebhook | Send how many brushes you got and when they broke |
 
 ---
 
@@ -33,6 +48,18 @@ Both keybindings can be rebound in **Options → Controls → AutoRepair**.
 
 ---
 
+## Discord Webhook Setup
+
+1. In Discord, go to your server → **Server Settings** → **Integrations** → **Webhooks** → **New Webhook** (or edit a channel → Integrations → Webhooks).
+2. Copy the webhook URL.
+3. In-game, press **[G]** to open the AutoRepair GUI and paste the URL into the **Discord Webhook URL** field.
+4. When your brush breaks, the mod will:
+   - **@here** ping everyone in that channel
+   - Send an embed with your name, time, and **how many brushes you have left** (hotbar + inventory)
+   - Auto-switch to the next brush in your hotbar (if you have one)
+
+---
+
 ## GUI Settings
 
 | Field | Description | Default |
@@ -40,9 +67,11 @@ Both keybindings can be rebound in **Options → Controls → AutoRepair**.
 | Click Count | Number of right-clicks per cycle | 10 |
 | Click Speed (ms) | Milliseconds between clicks (fixed mode) | 50 |
 | Repair Delay (ms) | Wait time (ms) after last click before /repair | 500 |
+| Command | Chat command to send after clicks (e.g. `repair` → /repair) | repair |
 | Enable Random Delay | Use random per-click delays instead of fixed | Off |
 | Min Delay (ms) | Lower bound of random delay range | 6 |
 | Max Delay (ms) | Upper bound of random delay range | 10 |
+| Discord Webhook URL | Webhook URL for brush-break alerts. Paste your Discord webhook URL here. Leave empty to disable. | (empty) |
 
 ---
 
@@ -59,10 +88,12 @@ autorepair-mod/
 └── src/main/
     ├── java/com/autorepair/
     │   ├── AutoRepairMod.java           # Client entrypoint — keybinds, HUD, tick events
-    │   ├── AutoClickerConfig.java       # Singleton config (click count, delays, etc.)
+    │   ├── AutoClickerConfig.java       # Singleton config (click count, delays, webhook URL, etc.)
     │   ├── AutoClickerManager.java      # Click loop thread, /repair command sender
     │   ├── AutoRepairScreen.java        # In-game GUI (Screen + widgets)
     │   ├── HudRenderer.java             # HUD overlay (status + click progress)
+    │   ├── BrushBreakDetector.java      # Detects brush breaks, auto-switches hotbar, triggers Discord alert
+    │   ├── DiscordWebhookSender.java    # Sends brush-break alerts to Discord (with @here + brush counts)
     │   └── mixin/
     │       └── InGameHudMixin.java      # Mixin placeholder (InGameHud target)
     │
@@ -207,6 +238,7 @@ The manager currently loops indefinitely until `stop()` is called. To run only o
 | Build fails with `Could not resolve fabric-api` | Check internet connection; Fabric maven may be temporarily down |
 | Mod loads but right-clicks don't work | Make sure you're in a world and not in a menu screen |
 | `/repair` command not working | This requires a server plugin (EssentialsX, CMI, etc.) that provides `/repair` |
+| Discord @here doesn't ping | The webhook's channel/role must allow @everyone/@here mentions (check Discord server settings) |
 
 ---
 
