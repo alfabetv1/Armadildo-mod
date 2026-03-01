@@ -1,5 +1,6 @@
 # AutoRepair Mod — Fabric 1.21.1 
 # (Robiony w 100% z AI, claude ai i cursor)
+caly readme po angielsku bo latwiej bylo wytłumaczyć ai wklejcie se w chatgpt zeby przetlumaczyl
 
 A client-side Fabric mod for Minecraft 1.21.1 that automatically right-clicks a configurable number of times, then sends the `/repair` command — all from a clean in-game GUI.
 
