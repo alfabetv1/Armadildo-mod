@@ -1,4 +1,7 @@
 # AutoRepair Mod — Fabric 1.21.1
+# Robiony w 100% z Claude.ai i cursor
+
+## Cały Readme po angielsku bo łatwiej było wytlumaczyć ai
 
 A client-side Fabric mod for Minecraft 1.21.1 that auto right-clicks for brushing, sends `/repair`, and alerts you when your brush breaks — with Discord webhook support and in-game configuration.
 
